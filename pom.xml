@@ -20,6 +20,8 @@
     </parent>
     <modules>
         <module>spring-cloud-erueka</module>
+        <module>spring-cloud-service</module>
+        <module>spring-cloud-user</module>
     </modules>
 
     <properties>

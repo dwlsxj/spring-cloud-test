@@ -1,0 +1,13 @@
+server:
+  port: 8889
+
+eureka:
+  instance:
+    hostname: spring-cloud-eureka-server
+    prefer-ip-address: true
+#    metadata-map:
+#      user.name: ${security.user.name}
+#      user.password: ${security.user.password}
+  client:
+    service-url:
+      defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
