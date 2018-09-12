@@ -9,8 +9,8 @@ eureka:
     registerWithEureka: false # 是否注册自己。
     fetchRegistry: false      # 是否获取信息。
     service-url: # 服务提供地址。
-      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
-
+#      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+       defaultZone: http://${security.user.name}:${security.user.password}@localhost:${server.port}/eureka/
 security: # 网络安全。
   user:
     name: admin

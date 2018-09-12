@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    hostname: spring-cloud-eureka-server
+    hostname: spring-cloud-user
     prefer-ip-address: true
 #    metadata-map:
 #      user.name: ${security.user.name}
