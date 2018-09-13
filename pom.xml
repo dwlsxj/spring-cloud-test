@@ -22,6 +22,7 @@
         <module>spring-cloud-erueka</module>
         <module>spring-cloud-service</module>
         <module>spring-cloud-user</module>
+        <module>spring-cloud-hystrix-turbine</module>
     </modules>
 
     <properties>
