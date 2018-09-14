@@ -6,8 +6,6 @@ spring:
       server:
         git:
           uri: https://github.com/dwlsxj/spring-cloud-test.git
-          username: dwlsxj@126.com
-          password: dwl08181217@sxj
           search-paths: git-repo
 eureka:
   instance:

@@ -22,9 +22,4 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 5000
-spring:
-  cloud:
-    config:
-      uri: http://localhost:8080
-      profile: dev
-      label: master
+
