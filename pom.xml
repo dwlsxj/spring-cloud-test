@@ -23,6 +23,8 @@
         <module>spring-cloud-service</module>
         <module>spring-cloud-user</module>
         <module>spring-cloud-hystrix-turbine</module>
+        <module>spring-cloud-zuul</module>
+        <module>spring-cloud-config</module>
     </modules>
 
     <properties>

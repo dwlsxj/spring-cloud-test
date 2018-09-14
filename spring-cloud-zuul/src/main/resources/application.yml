@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-cloud-zuul
+server:
+  port: 8040
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:password@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+zuul:
+  ignoredServices: spring-cloud-service
+  routes:
+    spring-cloud-user: /user/**     # 指定服务路径。
+
+# Hystrix超时等到时间。
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+# ribbon超时等待时间。
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
