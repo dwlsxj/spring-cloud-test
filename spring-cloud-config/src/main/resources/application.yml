@@ -8,3 +8,18 @@ spring:
           uri: https://github.com/dwlsxj/spring-cloud-test/tree/master/git-repo
           username: dwlsxj@126.com
           password: dwl08181217@sxj
+eureka:
+  instance:
+    hostname: spring-cloud-config
+    prefer-ip-address: true
+#    metadata-map:
+  #      user.name: ${security.user.name}
+  #      user.password: ${security.user.password}
+  client:
+    service-url:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
+# 安全。
+security:
+  user:
+    name: user
+    password: ${CONFIG_SERVER_PASSWORD:password}
