@@ -1,17 +1,17 @@
 server:
-  port: 8761 # ¶Ë¿ÚºÅ¡£
+  port: 8761  # ç«¯å£å·
 
 eureka:
   instance:
-    hostname: spring-cloud-eureka-server  # eureka·şÎñÃû
+    hostname: springcloudeurekaserver
     prefer-ip-address: true
   client:
-    registerWithEureka: false # ÊÇ·ñ×¢²á×Ô¼º¡£
-    fetchRegistry: false      # ÊÇ·ñ»ñÈ¡ĞÅÏ¢¡£
-    service-url: # ·şÎñÌá¹©µØÖ·¡£
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
 #      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
        defaultZone: http://${security.user.name}:${security.user.password}@localhost:${server.port}/eureka/
-security: # ÍøÂç°²È«¡£
+security:
   user:
     name: admin
     password: ${REGISTRY_SERVER_PASSWORD:password}

@@ -10,14 +10,14 @@ spring:
           password: dwl08181217@sxj
 eureka:
   instance:
-    hostname: spring-cloud-config
+    hostname: springcloudconfig
     prefer-ip-address: true
-#    metadata-map:
+  #    metadata-map:
   #      user.name: ${security.user.name}
   #      user.password: ${security.user.password}
   client:
     service-url:
-      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
+      defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
 # 安全。
 security:
   user:

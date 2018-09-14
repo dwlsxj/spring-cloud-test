@@ -20,7 +20,7 @@ public class TestController {
     @GetMapping(value = "getHelloWorld")
     @HystrixCommand(fallbackMethod = "fallback")
     public String getHelloWorld() {
-        return restTemplate.getForObject("http://spring-cloud-service/getHelloWorld", String.class);
+        return restTemplate.getForObject("http://springcloudservice/getHelloWorld", String.class);
     }
 
     /**

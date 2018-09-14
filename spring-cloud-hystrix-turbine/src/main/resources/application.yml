@@ -2,7 +2,7 @@ server:
   port: 8031
 spring:
   application:
-    name: spring-hystrix-turbine
+    name: springhystrixturbine
 eureka:
   client:
     serviceUrl:

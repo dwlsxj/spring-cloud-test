@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    hostname: spring-cloud-user
+    hostname: springclouduser
     prefer-ip-address: true
   #    metadata-map:
   #      user.name: ${security.user.name}
@@ -14,4 +14,15 @@ eureka:
     healthcheck:
       enabled: true
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
+# Hystrix超时时间。
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+spring:
+  cloud:
+    config:
+      uri: http://config:8888
