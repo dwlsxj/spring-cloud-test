@@ -4,4 +4,7 @@ spring:
   cloud:
     config:
       server:
-        git: 
+        git:
+          uri: https://github.com/dwlsxj/spring-cloud-test/tree/master/git-repo
+          username: dwlsxj@126.com
+          password: dwl08181217@sxj
