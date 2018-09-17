@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-cloud-slueth-zipkin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 9411
+
+security:
+  user:
+    name: admin
+    password: ${ZIPKIN_SERVER_PASSWORD:admin}
