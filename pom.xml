@@ -25,6 +25,7 @@
         <module>spring-cloud-hystrix-turbine</module>
         <module>spring-cloud-zuul</module>
         <module>spring-cloud-config</module>
+        <module>spring-cloud-slueth-zipkin</module>
     </modules>
 
     <properties>
