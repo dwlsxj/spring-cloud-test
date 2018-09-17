@@ -14,4 +14,16 @@ eureka:
     healthcheck:
       enabled: true
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
