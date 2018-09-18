@@ -3,14 +3,14 @@ server:
 
 eureka:
   instance:
-    hostname: springclouduser
+    hostname: localhost
     prefer-ip-address: true
   #    metadata-map:
   #      user.name: ${security.user.name}
   #      user.password: ${security.user.password}
   client:
     service-url:
-      defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
+      defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@${eureka.instance.hostname}:8761/eureka/
     healthcheck:
       enabled: true
 

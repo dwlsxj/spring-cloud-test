@@ -7,9 +7,9 @@ server:
 
 turbine:
   stream:
-    port: 8041
+    port: 8041    # 收集地址。
 
-eureka:
+eureka: # 注册为eureka服务。
   instance:
     hostname: registry
     prefer-ip-address: true

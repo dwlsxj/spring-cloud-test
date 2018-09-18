@@ -16,6 +16,8 @@
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
+        <!--Spring Boot 后台管理相关引用-->
+        <!--Spring Boot 后台管理服务-->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server</artifactId>
@@ -28,10 +30,12 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server-ui-login</artifactId>
         </dependency>
+        <!--Spring Boot 后台管理系统集成Hystrix监控-->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
         </dependency>
+        <!--Spring Boot 后台管理系统集成turbine-->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
