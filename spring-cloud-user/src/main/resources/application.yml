@@ -29,3 +29,6 @@ spring:
     password: guest
     host: localhost
 
+management:
+  security:
+    enabled: false

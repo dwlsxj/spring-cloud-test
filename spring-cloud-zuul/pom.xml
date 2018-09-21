@@ -13,8 +13,7 @@
 
     <name>spring-cloud-zuul</name>
     <description>Demo project for Spring Boot</description>
-
-
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

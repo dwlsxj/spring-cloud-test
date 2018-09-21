@@ -1,23 +1,30 @@
 server:
   port: 8080
+
 spring:
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/dwlsxj/spring-cloud-test.git
-          search-paths: git-repo
+          uri: https://github.com/dwlsxj/spring-cloud-test.git  # 配置仓库地址。
+          search-paths: git-repo # 仓库文件夹地址。
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
+
 eureka:
   instance:
-    hostname: springcloudconfig
+    hostname: springcloudconfig  # HostName。
     prefer-ip-address: true
-  #    metadata-map:
-  #      user.name: ${security.user.name}
-  #      user.password: ${security.user.password}
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
   client:
     service-url:
-      defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
-# 安全。
+      defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/  # Eureka地址。
+# 安全验证。
 security:
   user:
     name: user

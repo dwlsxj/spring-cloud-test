@@ -2,7 +2,7 @@ spring:
   application:
     name: spring-cloud-zuul
 server:
-  port: 8040
+  port: 8050
 eureka:
   client:
     service-url:
@@ -10,9 +10,9 @@ eureka:
   instance:
     prefer-ip-address: true
 zuul:
-  ignoredServices: spring-cloud-service
+  ignoredServices: springcloudservice
   routes:
-    spring-cloud-user: /user/**     # 指定服务路径。
+    springclouduser: /user/**     # 指定服务路径。
 
 # Hystrix超时等到时间。
 hystrix:

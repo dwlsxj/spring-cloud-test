@@ -27,6 +27,7 @@
         <module>spring-cloud-config</module>
         <module>spring-cloud-slueth-zipkin</module>
         <module>spring-cloud-monitor</module>
+        <module>spring-cloud-auth</module>
     </modules>
 
     <properties>

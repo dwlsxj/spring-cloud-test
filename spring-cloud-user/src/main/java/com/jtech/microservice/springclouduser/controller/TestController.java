@@ -1,6 +1,8 @@
 package com.jtech.microservice.springclouduser.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class TestController {
+
+    private static Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
     private RestTemplate restTemplate;
@@ -21,6 +25,7 @@ public class TestController {
     @GetMapping(value = "getHelloWorld")
     @HystrixCommand(fallbackMethod = "fallback")
     public String getHelloWorld() {
+        logger.error("this is a error");
         return restTemplate.getForObject("http://springcloudservice/getHelloWorld", String.class);
     }
 
