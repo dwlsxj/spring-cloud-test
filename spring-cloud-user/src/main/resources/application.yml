@@ -5,9 +5,9 @@ eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
-  #    metadata-map:
-  #      user.name: ${security.user.name}
-  #      user.password: ${security.user.password}
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
   client:
     service-url:
       defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@${eureka.instance.hostname}:8761/eureka/
@@ -29,6 +29,9 @@ spring:
     password: guest
     host: localhost
 
+# Spring Boot Admin配置相关
+# SpringBoot 1.5以后的版本都默认开启端点保护
 management:
   security:
     enabled: false
+

@@ -5,9 +5,9 @@ eureka:
   instance:
     hostname: springcloudservice
     prefer-ip-address: true
-  #    metadata-map:
-  #      user.name: ${security.user.name}
-  #      user.password: ${security.user.password}
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
   client:
     service-url:
       defaultZone: http://admin:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
@@ -27,3 +27,8 @@ spring:
     port: 5672
     username: guest
     password: guest
+
+
+management:
+  security:
+    enabled: false

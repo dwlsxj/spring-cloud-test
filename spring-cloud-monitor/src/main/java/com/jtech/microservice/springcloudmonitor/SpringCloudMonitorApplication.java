@@ -2,6 +2,7 @@ package com.jtech.microservice.springcloudmonitor;
 
 import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
@@ -23,21 +24,21 @@ public class SpringCloudMonitorApplication {
     public static class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            // Page with login form is served as /login.html and does a POST on /login
+            // 具有登录表单的页面作为/login.html提供，并在/ login上执行POST。
             http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll();
-            // The UI does a POST on /logout on logout
+            // 设置登出页面地址。
             http.logout().logoutUrl("/logout");
-            // The ui currently doesn't support csrf
+            // 设置目前不支持csrf。
             http.csrf().disable();
 
-            // Requests for the login page and the static assets are allowed
+            // 允许静态页面，静态数据的访问。
             http.authorizeRequests()
                     .antMatchers("/login.html", "/**/*.css", "/img/**", "/third-party/**")
                     .permitAll();
-            // ... and any other request needs to be authorized
+            // 除了授权的页面所有内容都要进行授权访问。
             http.authorizeRequests().antMatchers("/**").authenticated();
 
-            // Enable so that the clients can authenticate via HTTP basic for registering
+            // 启用安全认证，以便客户端可以通过HTTP basic进行身份验证以进行注册。
             http.httpBasic();
         }
     }

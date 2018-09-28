@@ -12,5 +12,6 @@ eureka:
 turbine:
   aggregator:
     clusterConfig: default
-  appConfig: spring-cloud-user,spring-cloud-service
-  clusterNameExpression: "'default'"
+  appConfig: springclouduser,springcloudservice # turbine.app-config指定了要收集监控信息的服务名
+  clusterNameExpression: "'default'" # turbine.cluster-name-expression 指定集群名称
+  combine-host-port: true # 使同一主机上的多个服务实例可以通过主机名和端口号的组合来进行区分

@@ -5,15 +5,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     default-property-inclusion: non_null
-  redis:
-    database: 2
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:6379}
-    pool:
-    max-active: 20
   datasource:
     name: test
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/ag_auth_v1?useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/token_store?useUnicode=true&characterEncoding=UTF8&useSSL=true
     username: root
     password: dwl,.123
     # 使用druid数据源
@@ -94,9 +88,5 @@ client:
   rsa-secret: x2318^^(*WRYQWR(QW&T
 
 management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
   security:
     enabled: false

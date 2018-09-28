@@ -1,25 +1,18 @@
 package com.jtech.microservice.springcloudauth.auth;
 
-import com.jtech.microservice.springcloudauth.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
-import java.security.KeyPair;
-import java.util.HashMap;
-import java.util.Map;
+import javax.sql.DataSource;
 
 /**
  * 授权相关配置信息。
@@ -31,13 +24,16 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    private MyUserDetailsService userDetailsService;
+//    private MyUserDetailsService userDetailsService;
 
-    /**
-     * 构造函数。
-     */
-    public OAuthConfiguration() {
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+    @Autowired
+    DataSource dataSource;
+
+    @Bean
+    public JdbcTokenStore tokenStore() {
+        return new JdbcTokenStore(dataSource);
     }
 
     /**
@@ -59,11 +55,25 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory() // 使用in-memory存储
-                .withClient("client") // client_id
-                .secret("secret") // client_secret
-                .authorizedGrantTypes("authorization_code") // 该client允许的授权类型
-                .scopes("app"); // 允许的授权范围
+
+        clients.jdbc(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder)
+                .withClient("client")
+                .secret("secret")
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("read", "write")
+                .accessTokenValiditySeconds(3600) // 1 hour
+                .refreshTokenValiditySeconds(2592000) // 30 days
+                .and()
+                .withClient("svca-service")
+                .secret("password")
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
+                .and()
+                .withClient("svcb-service")
+                .secret("password")
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server");
     }
 
     /**
@@ -75,27 +85,29 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         // @formatter:off
-        endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService)
-                .accessTokenConverter(accessTokenConverter());
+        endpoints
+                .tokenStore(tokenStore());
         // @formatter:on
     }
 
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter() {
-            @Override
-            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-                String userName = authentication.getUserAuthentication().getName();
-                final Map<String, Object> additionalInformation = new HashMap<>();
-                additionalInformation.put("user_name", userName);
-                ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
-                OAuth2AccessToken token = super.enhance(accessToken, authentication);
-                return token;
-            }
-        };
-        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("kevin_key.jks"), "123456".toCharArray())
-                .getKeyPair("kevin_key");
-        converter.setKeyPair(keyPair);
-        return converter;
-    }
+    /**
+     * 全局初始化数据库数据信息。
+     */
+//    @Configuration
+//    @Order(-20)
+//    protected static class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
+//
+//        @Autowired
+//        private DataSource dataSource;
+//
+//        @Override
+//        public void init(AuthenticationManagerBuilder auth) throws Exception {
+//            auth.jdbcAuthentication().dataSource(dataSource)
+//                    .withUser("dave").password("secret").roles("USER")
+//                    .and()
+//                    .withUser("anil").password("password").roles("ADMIN")
+//            ;
+//
+//        }
+//    }
 }
